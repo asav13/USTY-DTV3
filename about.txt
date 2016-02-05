@@ -1,0 +1,35 @@
+Klasarnir Problematic, Problem, Tile og Solver eru allt bara gefnir 
+klasar sem eru bara þarna til þess að við getum látið þræðina hafa
+einhver verkefni sem taka smá tíma.
+Problem problem = Problematic.nextProblem(); gefur manni nýtt randam problem,
+þetta eru einhver stærfræði verkefni or some sem taka mislangan tíma.
+Solver.findAndPrintSolution() tekur inn Problem sem paramteter og leysir 
+problemið og skrifar út lausnina. Ég breytti því þannig það tekur líka inn
+integer svo það væri einfaldara að sjá hvaða verkefni var verið að leysa, læt það
+ss skrifa út númerið líka.
+
+Þar sem ég segi "setting up the problems" í byrjun er ég barað stilla
+array af 30 problemum svo það séu alltaf þau sömu sem eru notuð í part1 2 og 3,
+því getNext skilar bara random problemi. 
+
+Í part 1 eru þau bara keyrð hver á fætur öðru
+
+Í part 2 bý ég til nýjan þráð með 'new Thread' og starta honum með .start(),
+þetta er jafngilt því að gera
+	Thread myThread = new Thread(someRunnableClass);
+	myThread.start();
+
+ProblemRunner er klasi sem ég bjó til sem útfærir interfaceið Runnable (Java dót),
+sá klasi er með breyturnar Problem og Nr, og fallið Run sem tekur problemið og 
+kallar á findAndPrintSolution á það (og Nr til að skrifa út nr)
+Þannig að það sem línan
+	new Thread(new ProblemRunner(problems[i], i)).start();
+gerir er að búa til nýjan þráð sem býr til nýtt tilvik af ProblemRunner og keyrir Run
+fallið til að leysa eitt stykki Problem
+
+Í part 3 er e-ð ThreadPool dæmi sem er líka Java library...mér skilst að það 
+keyri POOL_SIZE marga þræði í einu, og stjóri því að þúst... ef POOL_SIZE er 10 þá
+hendir það 10 þráðum í gang, og um leið og einn er búinn þá hendi það öðrum í gang, 
+svo það séu í mesta lagi 10 í gangi each time
+
+...ritgerð :D
